@@ -3,10 +3,14 @@ import { AuthDto } from './dto/auth.dto'
 import { PrismaService } from 'src/prisma.service'
 import { faker } from '@faker-js/faker'
 import { hash } from 'argon2'
+import { JwtService } from '@nestjs/jwt'
 
 @Injectable()
 export class AuthService {
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(
+		private prisma: PrismaService,
+		private jwt: JwtService
+	) {}
 
 	async register(dto: AuthDto) {
 		const olsUser = await this.prisma.user.findUnique({
@@ -28,5 +32,18 @@ export class AuthService {
 		})
 
 		return newUser
+	}
+
+	private async issueTokens(userId: string) {
+		const data = { id: userId }
+		const accessToken = await this.jwt.sign(data, {
+			expiresIn: '1h'
+		})
+
+		const refreshToken = await this.jwt.sign(data, {
+			expiresIn: '7d'
+		})
+
+		return { accessToken, refreshToken }
 	}
 }
