@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: 123456
       POSTGRES_DB: delivery-app
     ports:
-      - '5432:5432'
+      - '5433:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -19,11 +19,12 @@ services:
       - postgres
     ports:
       - '4001:4000'
-    # env_file:
-    #   - .env
     environment: 
+      - PORT=4000
       - DATABASE_URL=postgresql://postgres:123456@delivery-app-db:5432/delivery-app
     #   - DATABASE_URL: postgresql://postgres:123456@localhost:5432/delivery-app
 
+    # env_file:
+    #   - .env
 volumes:
   pgdata:

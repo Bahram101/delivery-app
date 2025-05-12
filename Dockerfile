@@ -13,5 +13,5 @@ RUN npx prisma generate
 
 RUN yarn build
 
-EXPOSE 4000
+EXPOSE 4001
 CMD ["yarn", "start:dev"]
