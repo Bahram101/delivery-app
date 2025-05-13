@@ -14,4 +14,5 @@ RUN npx prisma generate
 RUN yarn build
 
 EXPOSE 4001
-CMD ["yarn", "start:dev"]
+# CMD ["yarn", "start:dev"]
+CMD npx prisma migrate deploy && yarn start:dev
