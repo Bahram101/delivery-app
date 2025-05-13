@@ -19,11 +19,10 @@ services:
       - postgres
     ports:
       - '4001:4001'
-    environment: 
-      - PORT=4001
-      - DATABASE_URL=postgresql://postgres:123456@delivery-app-db:5432/delivery-app 
-
-    # env_file:
-    #   - .env
+    # environment: 
+    #   - PORT=4001
+    #   - DATABASE_URL=postgresql://postgres:123456@delivery-app-db:5432/delivery-app 
+    env_file:
+      - .env.docker
 volumes:
   pgdata:
