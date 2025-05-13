@@ -7,7 +7,7 @@ COPY package*.json ./
 RUN yarn install
 
 COPY . .
-
+COPY .env .env
 RUN npx prisma generate
 
 RUN yarn build
