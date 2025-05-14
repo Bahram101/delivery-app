@@ -4,6 +4,7 @@ import { PrismaService } from 'src/prisma.service'
 import { faker } from '@faker-js/faker'
 import { hash } from 'argon2'
 import { JwtService } from '@nestjs/jwt'
+import { User } from '@prisma/client'
 
 @Injectable()
 export class AuthService {
@@ -30,8 +31,11 @@ export class AuthService {
 				password: await hash(dto.password)
 			}
 		})
-
-		return newUser
+		const tokens = await this.issueTokens(newUser.id)
+		return {
+			user: this.returnUserFields(newUser),
+			...tokens
+		}
 	}
 
 	private async issueTokens(userId: string) {
@@ -43,7 +47,13 @@ export class AuthService {
 		const refreshToken = await this.jwt.sign(data, {
 			expiresIn: '7d'
 		})
-
 		return { accessToken, refreshToken }
+	}
+
+	private returnUserFields(user: User) {
+		return {
+			id: user.id,
+			email: user.email
+		}
 	}
 }
