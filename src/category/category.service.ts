@@ -5,16 +5,45 @@ import { PrismaService } from 'src/prisma.service'
 export class CategoryService {
 	constructor(private prisma: PrismaService) {}
 
-	getAll() {
-		// return this.prisma.category.findMany({
-		// 	select: {
-		// 		id: true,
-		// 		name: true,
-		// 		image: true,
-		// 		createdAt: true,
-		// 		updatedAt: true
-		// 	}
-		// })
-		return ['Category 1', 'Category 2', 'Category 3']
+	async getAll() {
+		return this.prisma.category.findMany({
+			select: {
+				id: true,
+				name: true,
+				image: true,
+				createdAt: true,
+				updatedAt: true
+			}
+		})
+	}
+
+	async getById(id: string) {
+		const category = await this.prisma.category.findUnique({
+			where: {
+				id
+			}
+		})
+		if (!category) throw new Error('Category not found')
+		return category
+	}
+
+	async getBySlug(slug: string) {
+		const category = await this.prisma.category.findUnique({
+			where: {
+				slug
+			}
+		})
+		if (!category) throw new Error('Category not found')
+		return category
+	}
+
+	async create() {
+		return this.prisma.category.create({
+			data: {
+				name: '',
+				slug: '',
+				image: ''
+			}
+		})
 	}
 }
