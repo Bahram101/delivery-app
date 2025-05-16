@@ -14,11 +14,58 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @map("updated_at")
 
-  email      String @unique
+  email      String    @unique
   password   String
   name       String
-  avatarPath String @default("/uploads/default-avatar.png") @map("avatar_path")
-  phone      String @default("")
+  avatarPath String    @default("/uploads/default-avatar.png") @map("avatar_path")
+  phone      String    @default("")
+
+  favorites   Product[]
+  orders     Order[]
 
   @@map("users")
+}
+
+model Product {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  name        String @unique
+  slug        String @unique
+  description String
+  price       Int
+
+  userId     String?
+  user       User?     @relation(fields: [userId], references: [id])
+
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  @@map("products")
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  name  String @unique
+  slug  String @unique
+  image String
+
+  products Product[]
+
+  @@map("categories")
+}
+
+model Order {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  userId String?
+  User   User?   @relation(fields: [userId], references: [id])
+
+  @@map("orders")
 }
