@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
+import { CategoryDto } from './dto/category.dto'
+import { generateSlug } from './../generate-slug'
 
 @Injectable()
 export class CategoryService {
 	constructor(private prisma: PrismaService) {}
 
 	async getAll() {
-		return this.prisma.category.findMany({
+		return await this.prisma.category.findMany({
 			select: {
 				id: true,
 				name: true,
@@ -38,11 +40,32 @@ export class CategoryService {
 	}
 
 	async create() {
-		return this.prisma.category.create({
+		return await this.prisma.category.create({
 			data: {
 				name: '',
 				slug: '',
 				image: ''
+			}
+		})
+	}
+
+	async update(id: string, dto: CategoryDto) {
+		return await this.prisma.category.update({
+			where: {
+				id
+			},
+			data: {
+				name: dto.name,
+				slug: generateSlug(dto.name),
+				image: dto.image
+			}
+		})
+	}
+
+	async delete(id: string) {
+		return await this.prisma.category.delete({
+			where: {
+				id
 			}
 		})
 	}
