@@ -6,4 +6,7 @@ export class CategoryDto {
 
 	@IsString()
 	image: string
+
+	// @IsString()
+	// slug: string
 }

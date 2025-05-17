@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { CategoryDto } from './dto/category.dto'
 import { generateSlug } from './../generate-slug'
@@ -39,8 +39,8 @@ export class CategoryService {
 		return category
 	}
 
-	async create() {
-		return await this.prisma.category.create({
+	async create(dto: CategoryDto) {
+		return this.prisma.category.create({
 			data: {
 				name: '',
 				slug: '',
@@ -48,6 +48,28 @@ export class CategoryService {
 			}
 		})
 	}
+
+	// async create(dto: CategoryDto) {
+	// 	const existing = await this.prisma.category.findFirst({
+	// 		where: {
+	// 			OR: [{ name: dto.name }, { slug: dto.slug }]
+	// 		}
+	// 	})
+
+	// 	if (existing) {
+	// 		throw new BadRequestException(
+	// 			'Category with this name or slug already exists'
+	// 		)
+	// 	}
+
+	// 	return this.prisma.category.create({
+	// 		data: {
+	// 			name: dto.name,
+	// 			slug: dto.slug,
+	// 			image: dto.image
+	// 		}
+	// 	})
+	// }
 
 	async update(id: string, dto: CategoryDto) {
 		return await this.prisma.category.update({
