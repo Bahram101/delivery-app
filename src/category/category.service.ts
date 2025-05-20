@@ -1,3 +1,4 @@
+import { returnCategoryObject } from './return-category.object';
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { CategoryDto } from './dto/category.dto'
@@ -9,13 +10,7 @@ export class CategoryService {
 
 	async getAll() {
 		return await this.prisma.category.findMany({
-			select: {
-				id: true,
-				name: true,
-				image: true,
-				createdAt: true,
-				updatedAt: true
-			}
+			select: returnCategoryObject
 		})
 	}
 
