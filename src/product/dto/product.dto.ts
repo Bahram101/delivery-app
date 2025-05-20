@@ -14,5 +14,5 @@ export class ProductDto {
 	categoryId: string
 
 	@IsNumber()
-	price: string
+	price: number
 }
