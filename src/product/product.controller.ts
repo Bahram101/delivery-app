@@ -13,26 +13,16 @@ import {
 } from '@nestjs/common'
 import { ProductService } from './product.service'
 import { ProductDto } from './dto/product.dto'
+import { Auth } from 'src/auth/decorators/auth.decorator'
 
 @Controller('products')
 export class ProductController {
 	constructor(private productService: ProductService) {}
 
-	@HttpCode(200)
-	@Post()
-	async create(@Body() dto: ProductDto) {
-		return this.productService.create(dto)
-	}
-
 	@UsePipes(new ValidationPipe())
 	@Get()
 	async getAll(@Query('searchTerm') searchTerm?: string) {
 		return this.productService.getAll(searchTerm)
-	}
-
-	@Put(':id')
-	async update(@Param('id') id: string, @Body() dto: ProductDto) {
-		return this.productService.update(id, dto)
 	}
 
 	@Get('by-slug/:slug')
@@ -46,6 +36,22 @@ export class ProductController {
 	}
 
 	@HttpCode(200)
+	@UsePipes(new ValidationPipe())
+	@Auth()
+	@Post()
+	async create(@Body() dto: ProductDto) {
+		return this.productService.create(dto)
+	}
+
+	@UsePipes(new ValidationPipe())
+	@Auth()
+	@Put(':id')
+	async update(@Param('id') id: string, @Body() dto: ProductDto) {
+		return this.productService.update(id, dto)
+	}
+
+	@HttpCode(200)
+	@Auth()
 	@Delete(':id')
 	async delete(@Param('id') id: string) {
 		return this.productService.delete(id)

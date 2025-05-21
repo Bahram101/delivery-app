@@ -73,7 +73,7 @@ collection:
         meta:
           id: req_074e91091ae34da981ed928b9adcc74d
           created: 1747381268346
-          modified: 1747381430748
+          modified: 1747822182206
           isPrivate: false
           sortKey: -1747381268346
         method: POST
@@ -81,7 +81,7 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"email":"test16@test.ru",
+            	"email":"test@test.ru",
             	"password":"123456"
             }
         headers:
@@ -136,9 +136,9 @@ collection:
         meta:
           id: req_e58f9d569d6a40d9b217235a7962c64c
           created: 1747396885172
-          modified: 1747815379902
+          modified: 1747821865912
           isPrivate: false
-          sortKey: -1747463355548
+          sortKey: -1747463318770
         method: GET
         body:
           mimeType: application/json
@@ -160,7 +160,7 @@ collection:
         meta:
           id: req_304f07d0a4be4e849dacfe2fa815d246
           created: 1747463282192
-          modified: 1747741201388
+          modified: 1747816010072
           isPrivate: false
           sortKey: -1747463282192
         method: GET
@@ -204,7 +204,7 @@ collection:
         meta:
           id: req_ff90655273444b31831ae7c4f97c6e87
           created: 1747467688073
-          modified: 1747467976879
+          modified: 1747819590204
           isPrivate: false
           sortKey: -1747463355448
         method: PUT
@@ -212,8 +212,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name":"Coffee",
-            	"image":"/uploads/images/categories/coffee.png"
+            	"name":"Fry",
+            	"image":"/uploads/images/categories/fries.png"
             }
         headers:
           - name: Content-Type
@@ -228,12 +228,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.URL }}/categories/by-slug/coffee"
+      - url: "{{ _.URL }}/categories/by-slug/burger2"
         name: get-by-slug
         meta:
           id: req_25313bfee7534db8943efd09f7a5ec13
           created: 1747468163676
-          modified: 1747809130126
+          modified: 1747816027580
           isPrivate: false
           sortKey: -1747396885072
         method: GET
@@ -275,12 +275,12 @@ collection:
       modified: 1747736406018
       sortKey: -1747736406018
     children:
-      - url: "{{ _.URL }}/products/by-slug/asdf"
+      - url: "{{ _.URL }}/products/by-slug/burger2"
         name: get-by-slug
         meta:
           id: req_754febbe83874cb9944dcd4a2f7b64fc
           created: 1747736412170
-          modified: 1747809168227
+          modified: 1747822047849
           isPrivate: false
           sortKey: -1747736412170
         method: GET
@@ -300,7 +300,7 @@ collection:
         meta:
           id: req_e90630e1fef34cbfb48d807bbefaab45
           created: 1747740104175
-          modified: 1747807843757
+          modified: 1747822001694
           isPrivate: false
           sortKey: -1747740104175
         method: POST
@@ -308,7 +308,11 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	
+            	"name":"Drink",
+            	"description":"Drink drink",
+            	"price": 500,
+            	"image":"uploads/images/products/drink.png",
+            	"categoryId":"cmarurz480000hv9kc9gc5j44"
             }
         headers:
           - name: Content-Type
@@ -323,12 +327,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.URL }}/products/cmawfgviz0000hvxwp9s0ub5e"
+      - url: "{{ _.URL }}/products/cmaxs2e530000hvqw8sha9gty"
         name: update
         meta:
           id: req_195fd42bce114bf291d61a3f18b444a1
           created: 1747741077332
-          modified: 1747744883440
+          modified: 1747822030540
           isPrivate: false
           sortKey: -1747740104275
         method: PUT
@@ -336,10 +340,10 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"name":"asdf",
-            	"image":"asdf",
-            	"description":"asdf",
-            	"price": 123,
+            	"name":"Drink",
+            	"image":"/uploads/images/products/drink.png",
+            	"description":"Drink ddd",
+            	"price": 500,
             	"categoryId":"cmarv0vf40001hv00i1xr6530"
             }
         headers:
@@ -360,9 +364,9 @@ collection:
         meta:
           id: req_5c98e6ad91f948a1848294d341ea1123
           created: 1747741161563
-          modified: 1747815378142
+          modified: 1747821861769
           isPrivate: false
-          sortKey: -1747741161564
+          sortKey: -1747738258172.5
         method: GET
         headers:
           - name: User-Agent
@@ -375,12 +379,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.URL }}/products/by-category/ewrt"
+      - url: "{{ _.URL }}/products/by-category/fry"
         name: get-by-category
         meta:
           id: req_20cc3a85b5654bdfb5103722f85bf134
           created: 1747809050574
-          modified: 1747809193799
+          modified: 1747822094913
           isPrivate: false
           sortKey: -1747736412070
         method: GET
@@ -395,12 +399,12 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.URL }}/products/cmawfdfgu0000hvvcckv6thkt"
+      - url: "{{ _.URL }}/products/cmaxs2e530000hvqw8sha9gty"
         name: delete
         meta:
           id: req_bdaa807e6b6b45b2b376a18731ac5da5
           created: 1747812262378
-          modified: 1747812346373
+          modified: 1747822221703
           isPrivate: false
           sortKey: -1747812262378
         method: DELETE
@@ -446,8 +450,8 @@ environments:
   meta:
     id: env_10f0b1379018c15a0677b0b53dab9ed9b96ea5db
     created: 1746686162197
-    modified: 1747381242815
+    modified: 1747822201553
     isPrivate: false
   data:
     URL: localhost:4000/api
-    TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtYXFoMzZkejAwMDBodmt3cDE1YnRqdzciLCJpYXQiOjE3NDczODEyMTIsImV4cCI6MTc0NzM4NDgxMn0.IRPQ3-p9MTj3xrhdNC9PXismdkoJ3cM3nxsvke9Hk5g
+    TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtYWh4bWY5NDAwMDBodjM0N3hzcHZiaDYiLCJpYXQiOjE3NDc4MjIxODQsImV4cCI6MTc0NzgyNTc4NH0.CsQiaYnUSPnCjo1TaaKjOX7hzccfcC-u9owFEu-vH78

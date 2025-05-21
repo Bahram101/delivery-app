@@ -71,13 +71,22 @@ export class ProductService {
 	}
 
 	async create(dto: ProductDto) {
+		const { name, description, image, price, categoryId } = dto
+
+		await this.categoryService.getById(categoryId)
+
 		return this.prisma.product.create({
 			data: {
-				name: '',
-				slug: '',
-				image: '',
-				description: '',
-				price: 0
+				name,
+				slug: generateSlug(dto.name),
+				image,
+				description,
+				price,
+				category: {
+					connect: {
+						id: categoryId
+					}
+				}
 			}
 		})
 	}
