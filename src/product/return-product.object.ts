@@ -11,5 +11,3 @@ export const returnProductObject: Prisma.ProductSelect = {
 	slug: true,
 	category: { select: returnCategoryObject }
 }
-
-
