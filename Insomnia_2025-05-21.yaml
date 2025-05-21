@@ -136,9 +136,9 @@ collection:
         meta:
           id: req_e58f9d569d6a40d9b217235a7962c64c
           created: 1747396885172
-          modified: 1747742968523
+          modified: 1747815379902
           isPrivate: false
-          sortKey: -1747396885172
+          sortKey: -1747463355548
         method: GET
         body:
           mimeType: application/json
@@ -233,10 +233,30 @@ collection:
         meta:
           id: req_25313bfee7534db8943efd09f7a5ec13
           created: 1747468163676
-          modified: 1747741192635
+          modified: 1747809130126
           isPrivate: false
-          sortKey: -1747468163676
+          sortKey: -1747396885072
         method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.URL }}/categories/cmarut0b40000hv08t3uxioxd"
+        name: delete
+        meta:
+          id: req_66b382e3bdbe497a9f581aa3d235ae7b
+          created: 1747815390218
+          modified: 1747815419455
+          isPrivate: false
+          sortKey: -1747815390218
+        method: DELETE
         headers:
           - name: User-Agent
             value: insomnia/11.1.0
@@ -255,12 +275,12 @@ collection:
       modified: 1747736406018
       sortKey: -1747736406018
     children:
-      - url: "{{ _.URL }}/products/by-slug/coffee"
+      - url: "{{ _.URL }}/products/by-slug/asdf"
         name: get-by-slug
         meta:
           id: req_754febbe83874cb9944dcd4a2f7b64fc
           created: 1747736412170
-          modified: 1747741181223
+          modified: 1747809168227
           isPrivate: false
           sortKey: -1747736412170
         method: GET
@@ -280,12 +300,16 @@ collection:
         meta:
           id: req_e90630e1fef34cbfb48d807bbefaab45
           created: 1747740104175
-          modified: 1747741075273
+          modified: 1747807843757
           isPrivate: false
           sortKey: -1747740104175
         method: POST
         body:
           mimeType: application/json
+          text: |-
+            {
+            	
+            }
         headers:
           - name: Content-Type
             value: application/json
@@ -331,15 +355,55 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.URL }}/products/get-all"
+      - url: "{{ _.URL }}/products"
         name: get-all
         meta:
           id: req_5c98e6ad91f948a1848294d341ea1123
           created: 1747741161563
-          modified: 1747741397624
+          modified: 1747815378142
           isPrivate: false
           sortKey: -1747741161564
         method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.URL }}/products/by-category/ewrt"
+        name: get-by-category
+        meta:
+          id: req_20cc3a85b5654bdfb5103722f85bf134
+          created: 1747809050574
+          modified: 1747809193799
+          isPrivate: false
+          sortKey: -1747736412070
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.URL }}/products/cmawfdfgu0000hvvcckv6thkt"
+        name: delete
+        meta:
+          id: req_bdaa807e6b6b45b2b376a18731ac5da5
+          created: 1747812262378
+          modified: 1747812346373
+          isPrivate: false
+          sortKey: -1747812262378
+        method: DELETE
         headers:
           - name: User-Agent
             value: insomnia/11.1.0

@@ -1,5 +1,5 @@
 import { generateSlug } from './../generate-slug'
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'src/prisma.service'
 import { ProductDto } from './dto/product.dto'
 import { CategoryService } from 'src/category/category.service'
@@ -16,7 +16,10 @@ export class ProductService {
 		if (searchTerm) return this.search(searchTerm)
 
 		return await this.prisma.product.findMany({
-			select: returnProductObject
+			select: returnProductObject,
+			orderBy: {
+				createdAt: 'desc'
+			}
 		})
 	}
 
@@ -49,7 +52,8 @@ export class ProductService {
 			},
 			select: returnProductObject
 		})
-		if (!product) throw new Error('product not found')
+
+		if (!product) throw new NotFoundException('Product not found')
 		return product
 	}
 
