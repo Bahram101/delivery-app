@@ -105,17 +105,63 @@ collection:
       sortKey: -1747116263246
     children:
       - url: "{{ _.URL }}/user/get-all"
-        name: getAll
+        name: get-all
         meta:
           id: req_685eb4d7cea246f2a9aa480771d6d265
           created: 1747116267145
-          modified: 1747396683630
+          modified: 1747829655243
           isPrivate: false
           sortKey: -1747116267145
         method: GET
         headers:
           - name: User-Agent
             value: insomnia/11.1.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.URL }}/users/profile"
+        name: get-profile
+        meta:
+          id: req_82178d2787864a2fbba9847b1d959564
+          created: 1747829657521
+          modified: 1747829885737
+          isPrivate: false
+          sortKey: -1747829657521
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.URL }}/users/profile/favorites/cmaxs2e530000hvqw8sha9gty"
+        name: toggle-favorite
+        meta:
+          id: req_8bf57561508c4844a09829abdf1ceda9
+          created: 1747830117141
+          modified: 1747830236418
+          isPrivate: false
+          sortKey: -1747830117141
+        method: PATCH
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+          token: "{{ _.TOKEN }}"
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -364,7 +410,7 @@ collection:
         meta:
           id: req_5c98e6ad91f948a1848294d341ea1123
           created: 1747741161563
-          modified: 1747821861769
+          modified: 1747830097570
           isPrivate: false
           sortKey: -1747738258172.5
         method: GET
@@ -450,8 +496,8 @@ environments:
   meta:
     id: env_10f0b1379018c15a0677b0b53dab9ed9b96ea5db
     created: 1746686162197
-    modified: 1747822201553
+    modified: 1747829795343
     isPrivate: false
   data:
     URL: localhost:4000/api
-    TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtYWh4bWY5NDAwMDBodjM0N3hzcHZiaDYiLCJpYXQiOjE3NDc4MjIxODQsImV4cCI6MTc0NzgyNTc4NH0.CsQiaYnUSPnCjo1TaaKjOX7hzccfcC-u9owFEu-vH78
+    TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtYWh4bWY5NDAwMDBodjM0N3hzcHZiaDYiLCJpYXQiOjE3NDc4Mjk3NTUsImV4cCI6MTc0NzgzMzM1NX0.QkwZjhPDxtKyx4UhtgZOY2b0SlR30lPr2HT1DHEjQ_M
