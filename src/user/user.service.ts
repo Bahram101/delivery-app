@@ -5,7 +5,7 @@ import { returnUserObject } from './return-user.object'
 
 @Injectable()
 export class UserService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private prisma: PrismaService) { }
 
 	async getById(id: string, selectObject: Prisma.UserSelect = {}) {
 		const user = await this.prisma.user.findUnique({
@@ -41,24 +41,33 @@ export class UserService {
 
 	async toggleFavorite(userId: string, productId: string) {
 		const user = await this.getById(userId)
+		
+		if (!user) throw new NotFoundException('User not found')
 
-		if (!user) throw new NotFoundException('User not found!')
-
-		const isExists = user.favorites.some(product => product.id === productId)
-
-		await this.prisma.user.update({
+		const isExists = await this.prisma.favorite.findFirst({
 			where: {
-				id: user.id
-			},
-			data: {
-				favorites: {
-					[isExists ? 'disconnect' : 'connect']: {
-						id: productId
-					}
-				}
+				userId,
+				productId
 			}
 		})
 
+		if (isExists) {
+			await this.prisma.favorite.delete({
+				where: {
+					userId_productId: {
+						userId,
+						productId
+					}
+				}
+			})
+		} else {
+			await this.prisma.favorite.create({
+				data: {
+					userId,
+					productId
+				}
+			})
+		}
 		return { message: 'Success' }
 	}
 }
