@@ -9,6 +9,10 @@ import { ProductModule } from './product/product.module';
 
 @Module({
 	imports: [
+		ServeStaticModule.forRoot({
+			rootPath: `${path}/uploads`,
+			servRoot: '/uploads'
+		})
 		ConfigModule.forRoot({ isGlobal: true }),
 		AuthModule,
 		UserModule,
