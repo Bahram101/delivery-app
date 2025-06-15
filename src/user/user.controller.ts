@@ -27,6 +27,7 @@ export class UserController {
 	@HttpCode(200)
 	@Get('get-all')
 	getAll() {
+		
 		return this.userService.getAllUsers()
 	}
 }
