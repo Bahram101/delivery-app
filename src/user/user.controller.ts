@@ -1,4 +1,12 @@
-import { Controller, Get, HttpCode, Param, Patch, UsePipes, ValidationPipe } from '@nestjs/common'
+import {
+	Controller,
+	Get,
+	HttpCode,
+	Param,
+	Patch,
+	UsePipes,
+	ValidationPipe
+} from '@nestjs/common'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 import { CurrentUser } from 'src/auth/decorators/user.decorator'
 import { UserService } from './user.service'
@@ -25,9 +33,8 @@ export class UserController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Get('get-all')
+	@Get('')
 	getAll() {
-		
 		return this.userService.getAllUsers()
 	}
 }
