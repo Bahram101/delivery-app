@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config'
 import { UserModule } from './user/user.module'
 import { CategoryModule } from './category/category.module'
 import { ProductModule } from './product/product.module'
-import path from 'app-root-path'
+import { path } from 'app-root-path'
 import { ServeStaticModule } from '@nestjs/serve-static'
 console.log('path', path)
 @Module({

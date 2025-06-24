@@ -80,7 +80,6 @@ export class UserService {
 	}
 
 	async getAllUsers() {
-		console.log('users all')
 		return await this.prisma.user.findMany()
 	}
 }
