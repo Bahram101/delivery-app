@@ -8,7 +8,7 @@ import { CategoryModule } from './category/category.module'
 import { ProductModule } from './product/product.module'
 import { path } from 'app-root-path'
 import { ServeStaticModule } from '@nestjs/serve-static'
-console.log('path', path)
+
 @Module({
 	imports: [
 		ServeStaticModule.forRoot({
