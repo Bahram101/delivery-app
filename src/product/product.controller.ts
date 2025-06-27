@@ -25,12 +25,12 @@ export class ProductController {
 		return this.productService.getAll(searchTerm)
 	}
 
-	@Get('by-slug/:slug')
+	@Get('/by-slug/:slug')
 	async getBySlug(@Param('slug') slug: string) {
 		return this.productService.getBySlug(slug)
 	}
 
-	@Get('by-category/:categorySlug')
+	@Get('/by-category/:categorySlug')
 	async getByCategory(@Param('categorySlug') categorySlug: string) {
 		return this.productService.getByCategory(categorySlug)
 	}
