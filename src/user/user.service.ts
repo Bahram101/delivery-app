@@ -14,6 +14,7 @@ export class UserService {
 			},
 			select: {
 				...returnUserObject,
+				...selectObject,
 				favorites: {
 					orderBy: {
 						createdAt: 'asc'
@@ -35,16 +36,16 @@ export class UserService {
 							}
 						}
 					}
-				},
-				...selectObject
+				}
 			}
 		})
 
 		if (!user) {
 			throw new Error('User not found')
 		}
+		const favoriteProducts = user.favorites?.map(f => f.product)
 
-		return user
+		return { ...user, favorites: favoriteProducts }
 	}
 
 	async toggleFavorite(userId: string, productId: string) {
