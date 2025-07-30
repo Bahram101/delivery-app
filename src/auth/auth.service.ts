@@ -52,28 +52,46 @@ export class AuthService {
 	}
 
 	async getNewTokens(refreshToken: string) {
-		const result = await this.jwt.verifyAsync(refreshToken)
-		if (!result) throw new UnauthorizedException('Invalid refresh token')
-		const user = await this.prisma.user.findUnique({
-			where: {
-				id: result.id
+		try {
+			console.log('getNewTokens refreshToken', refreshToken)
+			const result = await this.jwt.verifyAsync(refreshToken)
+
+			if (!result) {
+				throw new UnauthorizedException('Invalid refresh token')
 			}
-		})
-		const tokens = await this.issueTokens(user.id)
-		return {
-			user: this.returnUserFields(user),
-			...tokens
+
+			const user = await this.prisma.user.findUnique({
+				where: { id: result.id }
+			})
+
+			if (!user) {
+				throw new UnauthorizedException('User not found')
+			}
+
+			const tokens = await this.issueTokens(user.id)
+
+			return {
+				user: this.returnUserFields(user),
+				...tokens
+			}
+		} catch (error) {
+			if (error.name === 'TokenExpiredError') {
+				throw new UnauthorizedException('jwt expired')
+			}
+
+			throw new UnauthorizedException('Invalid refresh token')
 		}
 	}
 
 	private async issueTokens(userId: string) {
+		console.log('issueTokensUserId', userId)
 		const data = { id: userId }
 		const accessToken = await this.jwt.sign(data, {
-			expiresIn: '1h'
+			expiresIn: '1m'
 		})
 
 		const refreshToken = await this.jwt.sign(data, {
-			expiresIn: '7d'
+			expiresIn: '2m'
 		})
 		return { accessToken, refreshToken }
 	}

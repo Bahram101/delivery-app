@@ -27,6 +27,7 @@ export class ProductController {
 
 	@Get('/by-slug/:slug')
 	async getBySlug(@Param('slug') slug: string) {
+		console.log('slug', slug)
 		return this.productService.getBySlug(slug)
 	}
 

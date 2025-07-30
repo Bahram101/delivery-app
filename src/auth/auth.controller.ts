@@ -33,6 +33,7 @@ export class AuthController {
 	@Auth()
 	@Post('/refresh-token')
 	async getNewTokens(@Body() dto: RefreshTokenDto) {
+		console.log('refresh-token')
 		return this.authService.getNewTokens(dto.refreshToken)
 	}
 }
