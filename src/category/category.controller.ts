@@ -18,16 +18,19 @@ import { Auth } from 'src/auth/decorators/auth.decorator'
 export class CategoryController {
 	constructor(private categoryService: CategoryService) {}
 
+	@Auth()
 	@Get('')
 	async getAll() {
 		return this.categoryService.getAll()
 	}
 
+	@Auth()
 	@Get(':id')
 	async getById(@Param('id') id: string) {
 		return this.categoryService.getById(id)
 	}
 
+	@Auth()
 	@Get('/by-slug/:slug')
 	async getBySlug(@Param('slug') slug: string) {
 		return this.categoryService.getBySlug(slug)

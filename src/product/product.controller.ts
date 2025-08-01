@@ -20,17 +20,20 @@ export class ProductController {
 	constructor(private productService: ProductService) {}
 
 	@UsePipes(new ValidationPipe())
+	@Auth()
 	@Get()
 	async getAll(@Query('searchTerm') searchTerm?: string) {
 		return this.productService.getAll(searchTerm)
 	}
 
 	@Get('/by-slug/:slug')
+	@Auth()
 	async getBySlug(@Param('slug') slug: string) {
 		console.log('slug', slug)
 		return this.productService.getBySlug(slug)
 	}
 
+	@Auth()
 	@Get('/by-category/:categorySlug')
 	async getByCategory(@Param('categorySlug') categorySlug: string) {
 		return this.productService.getByCategory(categorySlug)
