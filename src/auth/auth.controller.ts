@@ -9,7 +9,6 @@ import {
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
 import { RefreshTokenDto } from './dto/refresh-token.dto'
-import { Auth } from './decorators/auth.decorator'
 @Controller('auth')
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
@@ -30,10 +29,10 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Auth()
-	@Post('/refresh-token')
+	// @Auth()
+	@Post('refresh-token')
 	async getNewTokens(@Body() dto: RefreshTokenDto) {
-		console.log('refresh-token')
+		console.log('refresh-token', dto)
 		return this.authService.getNewTokens(dto.refreshToken)
 	}
 }

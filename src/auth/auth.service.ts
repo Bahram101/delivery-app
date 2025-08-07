@@ -53,6 +53,7 @@ export class AuthService {
 	}
 
 	async getNewTokens(refreshToken: string) {
+		console.log('getNewTokens', refreshToken)
 		const result = await this.jwt.verifyAsync(refreshToken)
 		if (!result) throw new UnauthorizedException('Invalid refresh token')
 
@@ -92,11 +93,11 @@ export class AuthService {
 		console.log('issueTokensUserId', userId)
 		const data = { id: userId }
 		const accessToken = await this.jwt.sign(data, {
-			expiresIn: '5s'
+			expiresIn: '10s'
 		})
 
 		const refreshToken = await this.jwt.sign(data, {
-			expiresIn: '20s'
+			expiresIn: '25s'
 		})
 		return { accessToken, refreshToken }
 	}
