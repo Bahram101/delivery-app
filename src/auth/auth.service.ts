@@ -52,45 +52,46 @@ export class AuthService {
 		}
 	}
 
-	async getNewTokens(refreshToken: string) {
-		console.log('getNewTokens', refreshToken)
-		const result = await this.jwt.verifyAsync(refreshToken)
-		if (!result) throw new UnauthorizedException('Invalid refresh token')
-
-		const user = await this.userService.getById(result.id)
-
-		const tokens = await this.issueTokens(user.id)
-
-		return {
-			user: this.returnUserFields(user),
-			...tokens
-		}
-	}
-
 	// async getNewTokens(refreshToken: string) {
-	// 	try {
-	// 		const result = await this.jwt.verifyAsync(refreshToken)
+	// 	console.log('getNewTokens', refreshToken)
+	// 	const result = await this.jwt.verifyAsync(refreshToken)
+	// 	if (!result) throw new UnauthorizedException('Invalid refresh token')
 
-	// 		const user = await this.userService.getById(result.id)
-	// 		const tokens = await this.issueTokens(user.id)
+	// 	const user = await this.userService.getById(result.id)
 
-	// 		return {
-	// 			user: this.returnUserFields(user),
-	// 			...tokens
-	// 		}
-	// 	} catch (error) {
-	// 		console.log('❌ JWT verify error:', error.name, error.message)
+	// 	const tokens = await this.issueTokens(user.id)
 
-	// 		if (error.name === 'TokenExpiredError') {
-	// 			throw new UnauthorizedException('jwt expired')
-	// 		}
-
-	// 		throw new UnauthorizedException('Invalid refresh token')
+	// 	return {
+	// 		user: this.returnUserFields(user),
+	// 		...tokens
 	// 	}
 	// }
 
+	async getNewTokens(refreshToken: string) {
+		try {
+			const result = await this.jwt.verifyAsync(refreshToken)
+
+			const user = await this.userService.getById(result.id)
+			const tokens = await this.issueTokens(user.id)
+
+			return {
+				user: this.returnUserFields(user),
+				...tokens
+			}
+		} catch (error) {
+			console.log('❌ JWT verify error:', error.name, error.message)
+
+			if (error.name === 'TokenExpiredError') {
+				throw new UnauthorizedException('jwt expired')
+			}
+
+			// throw new UnauthorizedException('Invalid refresh token')
+			throw error
+		}
+	}
+
 	private async issueTokens(userId: string) {
-		console.log('issueTokensUserId', userId)
+		// console.log('issueTokensUserId', userId)
 		const data = { id: userId }
 		const accessToken = await this.jwt.sign(data, {
 			expiresIn: '10s'
