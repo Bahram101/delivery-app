@@ -18,7 +18,7 @@ import { Auth } from 'src/auth/decorators/auth.decorator'
 export class CategoryController {
 	constructor(private categoryService: CategoryService) {}
 
-	@Auth()
+	// @Auth()
 	@Get('')
 	async getAll() {
 		return this.categoryService.getAll()

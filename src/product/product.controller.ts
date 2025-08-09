@@ -20,7 +20,7 @@ export class ProductController {
 	constructor(private productService: ProductService) {}
 
 	@UsePipes(new ValidationPipe())
-	@Auth()
+	// @Auth()
 	@Get()
 	async getAll(@Query('searchTerm') searchTerm?: string) {
 		return this.productService.getAll(searchTerm)

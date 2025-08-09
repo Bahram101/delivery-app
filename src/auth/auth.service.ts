@@ -16,7 +16,7 @@ export class AuthService {
 		private prisma: PrismaService,
 		private jwt: JwtService,
 		private userService: UserService
-	) {}
+	) { }
 
 	async register(dto: AuthDto) {
 		const olsUser = await this.prisma.user.findUnique({
@@ -79,13 +79,11 @@ export class AuthService {
 				...tokens
 			}
 		} catch (error) {
-			console.log('❌ JWT verify error:', error.name, error.message)
 
 			if (error.name === 'TokenExpiredError') {
 				throw new UnauthorizedException('jwt expired')
 			}
 
-			// throw new UnauthorizedException('Invalid refresh token')
 			throw error
 		}
 	}
