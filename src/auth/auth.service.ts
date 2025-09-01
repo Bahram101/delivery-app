@@ -92,11 +92,11 @@ export class AuthService {
 		// console.log('issueTokensUserId', userId)
 		const data = { id: userId }
 		const accessToken = await this.jwt.sign(data, {
-			expiresIn: '10s'
+			expiresIn: '10m'
 		})
 
 		const refreshToken = await this.jwt.sign(data, {
-			expiresIn: '25s'
+			expiresIn: '1h'
 		})
 		return { accessToken, refreshToken }
 	}
